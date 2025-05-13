@@ -1,0 +1,38 @@
+2025-05-08 16:51:59,652 - ERROR - shuffle_dim_large方法在数据集movielens-1m上 发生异常: module 'models.fs.shuffle_dim_large' has no attribute 'shuffle_dim_large'
+2025-05-08 16:51:59,653 - ERROR - Traceback (most recent call last):
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 284, in <module>
+    search_stage_main(args, fs_seed)
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 67, in search_stage_main
+    model = BaseModel(args, args.model, args.fs, unique_values, features)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/models/basemodel.py", line 22, in __init__
+    self.fs = get_model(dim_search, 'fs')(args,  features, unique_values) # feature selection method
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/common/utils.py", line 36, in get_model
+    model_class = getattr(model_module, model_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'models.fs.shuffle_dim_large' has no attribute 'shuffle_dim_large'
+
+2025-05-08 16:56:51,443 - ERROR - autodim方法在数据集movielens-1m上 发生异常: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+2025-05-08 16:56:51,444 - ERROR - Traceback (most recent call last):
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 284, in <module>
+    search_stage_main(args, fs_seed)
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 82, in search_stage_main
+    Val_AUC = trainer.fit(train_data,val_data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/common/fs_trainer.py", line 182, in fit
+    train_process_data = self.train_one_epoch(train_data, epoch_i,val_data,val_dataloader)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/common/fs_trainer.py", line 94, in train_one_epoch
+    bce_loss_per_epoch.append(loss.item())
+                              ^^^^^^^^^^^
+RuntimeError: CUDA error: device-side assert triggered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+

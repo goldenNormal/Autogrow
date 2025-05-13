@@ -1,0 +1,10 @@
+fea,dim
+user_id,16
+movie_id,16
+timestamp,16
+title,16
+genres,16
+gender,16
+age,16
+occupation,16
+zip,16

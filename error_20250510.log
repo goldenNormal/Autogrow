@@ -1,0 +1,42 @@
+2025-05-10 05:54:17,804 - ERROR - no_search方法在数据集criteo上 发生异常: CUDA out of memory. Tried to allocate 510.00 MiB. GPU 0 has a total capacity of 23.64 GiB of which 2.81 MiB is free. Including non-PyTorch memory, this process has 23.63 GiB memory in use. Of the allocated memory 23.12 GiB is allocated by PyTorch, and 56.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-05-10 05:54:17,809 - ERROR - Traceback (most recent call last):
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 288, in <module>
+    retrain_stage_main(args,seed, fs_seed )
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 170, in retrain_stage_main
+    Val_AUC = trainer.fit(train_data, val_data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/common/fs_trainer.py", line 182, in fit
+    train_process_data = self.train_one_epoch(train_data, epoch_i,val_data,val_dataloader)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/common/fs_trainer.py", line 117, in train_one_epoch
+    self.optimizers['optimizer_bb'].step()
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/optimizer.py", line 385, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/optimizer.py", line 76, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/adam.py", line 166, in step
+    adam(
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/adam.py", line 316, in adam
+    func(params,
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/adam.py", line 579, in _multi_tensor_adam
+    exp_avg_sq_sqrt = torch._foreach_sqrt(device_exp_avg_sqs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 510.00 MiB. GPU 0 has a total capacity of 23.64 GiB of which 2.81 MiB is free. Including non-PyTorch memory, this process has 23.63 GiB memory in use. Of the allocated memory 23.12 GiB is allocated by PyTorch, and 56.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2025-05-10 14:34:27,230 - ERROR - sseds方法在数据集criteo上 发生异常: CUDA out of memory. Tried to allocate 334.00 MiB. GPU 0 has a total capacity of 23.64 GiB of which 274.81 MiB is free. Including non-PyTorch memory, this process has 23.37 GiB memory in use. Of the allocated memory 22.85 GiB is allocated by PyTorch, and 69.02 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-05-10 14:34:27,234 - ERROR - Traceback (most recent call last):
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 280, in <module>
+    search_stage_main(args, fs_seed)
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 100, in search_stage_main
+    res = model.fs.single_shot_save_search(val_data,model, prune_ratio=0.9)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/models/fs/sseds.py", line 86, in single_shot_save_search
+    loss.backward()
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/_tensor.py", line 522, in backward
+    torch.autograd.backward(
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/autograd/__init__.py", line 266, in backward
+    Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 334.00 MiB. GPU 0 has a total capacity of 23.64 GiB of which 274.81 MiB is free. Including non-PyTorch memory, this process has 23.37 GiB memory in use. Of the allocated memory 22.85 GiB is allocated by PyTorch, and 69.02 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+

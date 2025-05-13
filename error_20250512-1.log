@@ -1,0 +1,63 @@
+2025-05-12 09:10:45,523 - ERROR - no_search方法在数据集criteo上 发生异常: CUDA out of memory. Tried to allocate 510.00 MiB. GPU 0 has a total capacity of 23.64 GiB of which 832.00 KiB is free. Including non-PyTorch memory, this process has 23.63 GiB memory in use. Of the allocated memory 23.12 GiB is allocated by PyTorch, and 58.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-05-12 09:10:45,524 - ERROR - Traceback (most recent call last):
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 295, in <module>
+    retrain_stage_main(args,seed, fs_seed )
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 177, in retrain_stage_main
+    Val_AUC = trainer.fit(train_data, val_data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/common/fs_trainer.py", line 169, in fit
+    train_process_data = self.train_one_epoch(train_data, epoch_i,val_data,val_dataloader)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/common/fs_trainer.py", line 109, in train_one_epoch
+    self.optimizers['optimizer_bb'].step()
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/optimizer.py", line 385, in wrapper
+    out = func(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/optimizer.py", line 76, in _use_grad
+    ret = func(self, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/adam.py", line 166, in step
+    adam(
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/adam.py", line 316, in adam
+    func(params,
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/optim/adam.py", line 579, in _multi_tensor_adam
+    exp_avg_sq_sqrt = torch._foreach_sqrt(device_exp_avg_sqs)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 510.00 MiB. GPU 0 has a total capacity of 23.64 GiB of which 832.00 KiB is free. Including non-PyTorch memory, this process has 23.63 GiB memory in use. Of the allocated memory 23.12 GiB is allocated by PyTorch, and 58.06 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+2025-05-12 09:55:31,054 - ERROR - sseds方法在数据集criteo上 发生异常: CUDA out of memory. Tried to allocate 620.00 MiB. GPU 0 has a total capacity of 23.64 GiB of which 138.81 MiB is free. Including non-PyTorch memory, this process has 23.50 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 63.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+2025-05-12 09:55:31,064 - ERROR - Traceback (most recent call last):
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 287, in <module>
+    search_stage_main(args, fs_seed)
+  File "/root/code/ShuffleDim/search_and_retrain.py", line 83, in search_stage_main
+    test_auc, test_bce_loss = trainer.test_eval(test_data,load_model = True)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/code/ShuffleDim/common/fs_trainer.py", line 245, in test_eval
+    self.model = torch.load(f'./ckpt/{self.args.model}_{self.args.fs}_{self.args.dataset}_best_model.pt', map_location= self.args.device)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/serialization.py", line 1026, in load
+    return _load(opened_zipfile,
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/serialization.py", line 1438, in _load
+    result = unpickler.load()
+             ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/serialization.py", line 1408, in persistent_load
+    typed_storage = load_tensor(dtype, nbytes, key, _maybe_decode_ascii(location))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/serialization.py", line 1382, in load_tensor
+    wrap_storage=restore_location(storage, location),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/serialization.py", line 1308, in restore_location
+    return default_restore_location(storage, map_location)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/serialization.py", line 391, in default_restore_location
+    result = fn(storage, location)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/serialization.py", line 271, in _cuda_deserialize
+    return obj.cuda(device)
+           ^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.11/site-packages/torch/_utils.py", line 115, in _cuda
+    untyped_storage = torch.UntypedStorage(
+                      ^^^^^^^^^^^^^^^^^^^^^
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 620.00 MiB. GPU 0 has a total capacity of 23.64 GiB of which 138.81 MiB is free. Including non-PyTorch memory, this process has 23.50 GiB memory in use. Of the allocated memory 22.98 GiB is allocated by PyTorch, and 63.58 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+

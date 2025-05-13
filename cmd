@@ -1,0 +1,1 @@
+python search_and_retrain.py > output.log 2>&1
