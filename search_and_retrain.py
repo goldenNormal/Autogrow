@@ -73,7 +73,7 @@ def search_stage_main(args,seed):
     val_data = (val_x.to('cuda'),val_y.to('cuda'))
     test_data = (test_x, test_y)
     ####
-    save_model_pt = f'./ckpt/{args.model}_{args.fs}_{args.dataset}_{args.fs_seed}_best_model.pt'
+    save_model_pt = f'{args.ckpt_path}/{args.model}_{args.fs}_{args.dataset}_{args.fs_seed}_best_model.pt'
     if not os.path.exists(save_model_pt):
         print('search .... stage ...')
         s = time.time()
@@ -213,6 +213,7 @@ if __name__ == '__main__':
     
     parser.add_argument('--patience', type=int, default=2, help='early stopping patience')
     parser.add_argument('--num_workers', type=int, default=32, help='num_workers')
+    parser.add_argument('--ckpt_path',type=str, default='/root/autodl-tmp/ckpt', help='model ckpt path')
     
     args = parser.parse_args()
 

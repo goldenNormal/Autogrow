@@ -204,7 +204,7 @@ class modeltrainer():
                     # self.model = self.early_stopper.best_model
                     
                     if self.args.mode == 'search':
-                        self.model = torch.load(f'./ckpt/{self.args.model}_{self.args.fs}_{self.args.dataset}_{self.args.fs_seed}_best_model.pt', map_location=torch.device('cpu'))
+                        self.model = torch.load(f'{self.args.ckpt_path}/{self.args.model}_{self.args.fs}_{self.args.dataset}_{self.args.fs_seed}_best_model.pt', map_location=torch.device('cpu'))
                     else:
                         self.model.load_state_dict(self.early_stopper.best_weights)
 
@@ -250,7 +250,7 @@ class modeltrainer():
     def test_eval(self,test_data,load_model=False):
         test_x,test_y = test_data
         if load_model:
-            self.model = torch.load(f'./ckpt/{self.args.model}_{self.args.fs}_{self.args.dataset}_{self.args.fs_seed}_best_model.pt', map_location= self.args.device)
+            self.model = torch.load(f'{self.args.ckpt_path}/{self.args.model}_{self.args.fs}_{self.args.dataset}_{self.args.fs_seed}_best_model.pt', map_location= self.args.device)
         
         self.model.eval()
         self.model = self.model.to('cuda')

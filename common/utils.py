@@ -68,7 +68,7 @@ class EarlyStopper(object):
 
             # self.best_model = copy.deepcopy(model)
             if self.args.mode == 'search':
-                torch.save(model, f'./ckpt/{self.args.model}_{self.args.fs}_{self.args.dataset}_{self.args.fs_seed}_best_model.pt')
+                torch.save(model, f'{self.args.ckpt_path}/{self.args.model}_{self.args.fs}_{self.args.dataset}_{self.args.fs_seed}_best_model.pt')
             else:
                 self.best_weights = copy.deepcopy(model.state_dict())
 
